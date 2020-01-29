@@ -4,17 +4,21 @@ const TechService = require('../services/techs');
 
 module.exports = {
 
-    // consulta dados de um único usuário
+    // consulta dados de uma única tecnologia
     async index(request , response ) {
-        
-        const { id } = request.params;
-        
-        const tech = await TechService.index(id);
+    
+        try{
 
-        return response.status(200).json(tech);
+            const { id } = request.query;
+            const tech = await TechService.index(id);
+
+            return response.status(200).json(tech);
+        }catch(err){
+            return response.status(400).json(err);
+        }
     },
 
-    // retorna todos os usuários cadastrados
+    // retorna todas as tecnologias cadastradas
     async all(request , response ) {
 
         const techs = await TechService.all();

@@ -31,9 +31,9 @@ module.exports = {
     },
 
     // Autentica usuário atráves do usuário e senha
-    async authenticate( email, senha ) {
+    async authenticate( email ) {
 
-        const user = await UserModel.findOne( { email , senha }, (err,res) => {
+        const user = await UserModel.findOne( { email }, (err,res) => {
             if(err){
                 console.log(err);
             }
@@ -58,11 +58,7 @@ module.exports = {
         if(nome === ""){
             return null;
         }
-
-        // cria o hash da senha
         
-
-
         // Inclui um novo usuário
         const user = await UserModel.create({
             nome,
@@ -78,6 +74,7 @@ module.exports = {
 
     // Remove um usuário
     async delete( id ) {
+
         const user = await UserModel.findByIdAndDelete( id , (err,res) => {
             if(err){
                 console.log(err);
