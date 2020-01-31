@@ -16,22 +16,28 @@ module.exports = {
         return response.status(200).json(newCheckin);
     },
     
-    async all( request, response ) {
+    async all(request, response ) {
 
         const allCheck = await checkinService.all();
-
 
         return response.status(200).json(allCheck);
     },
 
     // consulta check-ins por tecnologia
-    async usersByTech () {
+    async usersByTech (request , response) {
 
+        const result = await checkinService.usersByTech();
+
+        return response.status(200).json(result);
     },
 
     // consulta o total de check-ins por usuário
     // agrupando por tecnologia
-    async techByUsers () {
+    async techByUsers ( request  , response ) {
+
+        const result = await checkinService.techByUsers();
+
+        return response.status(200).json(result);
 
     },
 
