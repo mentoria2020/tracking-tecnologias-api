@@ -1,9 +1,14 @@
 
-
-
 const UserModel = require('../models/users');
 
 module.exports = {
+
+    async query ( condition ){
+
+        const result = await UserModel.find(condition).exec();
+
+        return result;
+    },
 
     async index( id ) {
 
@@ -17,14 +22,21 @@ module.exports = {
         return user;
     },
 
-    async all() {
+    async all(id) {
 
-        const users =  await UserModel.find((err,res) => {
-            if(err){
-                console.log(err);
-            }
+        let users;
+
+        if(id != null) {
+            users =  await UserModel.find({ _id : id }).exec();    
+        }else {
+
+            users =  await UserModel.find((err,res) => {
+                if(err){
+                    console.log(err);
+                }
             
-        });
+            });
+        }
 
         return users;
 
